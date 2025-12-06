@@ -10,7 +10,7 @@ const config = {
     port: process.env.DB_PORT ? Number(process.env.DB_PORT) : 5432,
     user: process.env.DB_USER || 'postgres',
     password: process.env.DB_PASSWORD || 'password',
-    database: process.env.DB_NAME || 'tasks_db',
+    database: process.env.DB_NAME || 'hmcts_tasks_db',
   },
   migrations: {
     directory: './apps/tasks-api/db/migrations',

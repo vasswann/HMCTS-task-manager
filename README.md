@@ -53,7 +53,7 @@ VITE_API_PORT=4000
 ### 4. Set up PostgreSQL
 
 ```sql
-CREATE DATABASE tasks_db;
+CREATE DATABASE hmcts_tasks_db;
 ```
 
 Or via CLI:
