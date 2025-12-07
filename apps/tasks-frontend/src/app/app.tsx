@@ -1,11 +1,7 @@
-import NxWelcome from './nx-welcome';
+import { TasksPage } from './pages/TasksPage';
 
 export function App() {
-  return (
-    <div>
-      <NxWelcome title="tasks-frontend" />
-    </div>
-  );
+  return <TasksPage />;
 }
 
 export default App;
