@@ -97,6 +97,7 @@ npx nx serve tasks-frontend
 Run test
 
 ```bash
+npx nx test tasks-api
 npx nx e2e tasks-api-e2e --output-style=stream
 npx nx e2e tasks-frontend-e2e --output-style=stream
 ```
@@ -127,6 +128,51 @@ npx nx e2e tasks-frontend-e2e --output-style=stream
 - Jest E2E: [https://jestjs.io/](https://jestjs.io/)
 
 ---
+
+## API Endpoints
+
+### GET /api/tasks
+
+Returns a list of tasks.
+Response:
+{
+"items": [
+{
+"id": "1",
+"publicId": "TSK-123...",
+"title": "...",
+"description": "...",
+"status": "todo",
+"dueDateTime": "ISO string",
+"createdAt": "ISO string",
+"updatedAt": "ISO string"
+}
+]
+}
+
+### POST /api/tasks
+
+Creates a new task.
+
+Request Body:
+{
+"title": "string (required)",
+"description": "string",
+"status": "todo | in_progress | done",
+"dueDateTime": "ISO datetime string"
+}
+
+Validation rules:
+
+- title is required
+- dueDateTime must be a valid ISO datetime
+- status must be one of: todo, in_progress, done
+
+Response:
+{
+"message": "Task created successfully",
+"task": { ... }
+}
 
 ## Project Structure
 
