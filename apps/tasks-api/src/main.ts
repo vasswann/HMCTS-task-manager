@@ -1,21 +1,11 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
+import * as dotenv from 'dotenv';
+dotenv.config();
 
-import express from 'express';
-import * as path from 'path';
+import { app } from './app';
 
-const app = express();
-
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
-
-app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to tasks-api!' });
-});
-
-const port = process.env.PORT || 3333;
+const port = process.env.API_PORT ? Number(process.env.API_PORT) : 4000;
 const server = app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}/api`);
+  console.log(`Create task:  POST http://localhost:${port}/api/tasks`);
 });
 server.on('error', console.error);

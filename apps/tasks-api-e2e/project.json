@@ -5,13 +5,15 @@
   "implicitDependencies": ["tasks-api"],
   "targets": {
     "e2e": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{e2eProjectRoot}"],
+      "executor": "nx:run-commands",
       "options": {
-        "jestConfig": "apps/tasks-api-e2e/jest.config.cts",
-        "passWithNoTests": true
+        "command": "npx jest --config=apps/tasks-api-e2e/jest.config.cjs",
+        "env": {
+          "TASKS_API_PORT": "4000",
+          "TASKS_API_URL": "http://localhost:4000"
+        }
       },
-      "dependsOn": ["tasks-api:build", "tasks-api:serve"]
+      "dependsOn": ["tasks-api:build"]
     }
   }
 }

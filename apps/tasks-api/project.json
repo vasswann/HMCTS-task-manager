@@ -52,6 +52,13 @@
       "options": {
         "passWithNoTests": true
       }
+    },
+    "serve-e2e": {
+      "executor": "@nx/js:node",
+      "options": {
+        "buildTarget": "tasks-api:build",
+        "watch": false
+      }
     }
   }
 }

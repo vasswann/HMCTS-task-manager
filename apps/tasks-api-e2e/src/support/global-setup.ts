@@ -1,16 +1,25 @@
+import { spawn } from 'child_process';
 import { waitForPortOpen } from '@nx/node/utils';
 
-/* eslint-disable */
-var __TEARDOWN_MESSAGE__: string;
-
 module.exports = async function () {
-  // Start services that that the app needs to run (e.g. database, docker-compose, etc.).
-  console.log('\nSetting up...\n');
+  console.log('\nSetting up API...\n');
 
-  const host = process.env.HOST ?? 'localhost';
-  const port = process.env.PORT ? Number(process.env.PORT) : 3000;
-  await waitForPortOpen(port, { host });
+  // Start API as child process
+  const server = spawn('node', ['dist/apps/tasks-api/main.js'], {
+    stdio: 'ignore', // 👈 hides all server logs to see server logs use 'inherit'
+    shell: true,
+    detached: true,
+    env: {
+      ...process.env,
+      PORT: process.env.TASKS_API_PORT ?? '4000',
+    },
+  });
 
-  // Hint: Use `globalThis` to pass variables to global teardown.
-  globalThis.__TEARDOWN_MESSAGE__ = '\nTearing down...\n';
+  // Save process handle for teardown
+  globalThis.__API_PROCESS__ = server;
+
+  // Wait for backend to be ready
+  await waitForPortOpen(Number(process.env.TASKS_API_PORT ?? 4000), {
+    host: 'localhost',
+  });
 };
