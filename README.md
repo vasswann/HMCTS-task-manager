@@ -85,7 +85,7 @@ npm run dev
 This starts:
 
 - **tasks-api** on `http://localhost:4000`
-- **tasks-frontend** on `http://localhost:5173`
+- **tasks-frontend** on `http://localhost:4200`
 
 Run separately:
 
@@ -119,17 +119,12 @@ npx nx e2e tasks-frontend-e2e --output-style=stream
 
 ### Workspace & Tooling
 
-- **Nx monorepo orchestration**: [https://nx.dev/](https://nx.dev/)
+- **Nx monorepo structure**: [https://nx.dev/](https://nx.dev/)
 - **Jest + Vitest**: [https://jestjs.io/](https://jestjs.io/), [https://vitest.dev/](https://vitest.dev/)
-
----
-
-## Non-Obvious Technologies
-
-- Nx monorepo structure
 - Knex + PostgreSQL pairing
-- Optional Cypress E2E: [https://www.cypress.io/](https://www.cypress.io/)
-- Optional TailwindCSS: [https://tailwindcss.com/](https://tailwindcss.com/)
+- Cypress E2E: [https://www.cypress.io/](https://www.cypress.io/)
+- TailwindCSS: [https://tailwindcss.com/](https://tailwindcss.com/)
+- Jest E2E: [https://jestjs.io/](https://jestjs.io/)
 
 ---
 
@@ -139,22 +134,71 @@ npx nx e2e tasks-frontend-e2e --output-style=stream
 hmcts-task-manager/
   apps/
     tasks-api/
+      db/
+        migrations/
+        seeds/
       src/
-      migrations/
+        controllers/
+          tasks.controller.ts
+        daos/
+        interfaces/
+        lib/
+        middleware/
+        models/
+        routes/
+        app.ts
+        db.ts
+        main.ts
+      project.json
+      jest.config.cts
+      webpack.config.js
+
     tasks-api-e2e/
+      src/
+        tasks-api/
+          tasks-api.spec.ts
+        support/
+      jest.config.cjs
+      project.json
+
     tasks-frontend/
       src/
-      public/
+        app/
+          api/
+            httpClient.ts
+            tasksApi.ts
+          components/
+            layout/
+            tasks/
+              TaskForm.tsx
+              TaskList.tsx
+          hooks/
+            useTasks.ts
+          pages/
+            TasksPage.tsx
+          types/
+            task.ts
+          app.tsx
+        main.tsx
+        styles.css
+      index.html
+      tailwind.config.js
+      vite.config.mts
+      project.json
+
     tasks-frontend-e2e/
+      src/
+        e2e/
+          app.cy.ts
+        support/
+      cypress.config.ts
+      project.json
+
   knexfile.cjs
-  tsconfig.base.json
-  nx.json
   package.json
+  nx.json
+  tsconfig.base.json
+  README.md
   .env
+  .gitignore
 ```
-
-### Directory Notes
-
-- `apps/tasks-api/migrations` — Schema evolution files
-- `apps/tasks-frontend/public` — Static browser assets
-- `apps/*-e2e` — Optional integration and browser tests
