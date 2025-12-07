@@ -1,6 +1,8 @@
 # HMCTS Task Manager
 
-A full-stack task management system built as an Nx monorepo. It includes an Express API, a React frontend, PostgreSQL storage with Knex.js, and optional E2E test suites. The codebase follows clear, modular patterns aimed at developers who regularly work on production web applications.
+A full-stack task management system built as an **Nx monorepo**.  
+It includes an Express API, a React frontend, PostgreSQL storage with Knex.js, and full E2E testing using CypressA and Jest.  
+The project demonstrates how to structure, test, and run modern production-style applications inside a shared workspace.
 
 ## Description
 
@@ -68,6 +70,12 @@ Run migrations:
 npx knex migrate:latest --knexfile knexfile.cjs
 ```
 
+Run Seed:
+
+```bash
+npx knex seed:run --knexfile knexfile.cjs
+```
+
 ### 5. Run the applications
 
 ```bash
@@ -84,6 +92,13 @@ Run separately:
 ```bash
 npx nx serve tasks-api
 npx nx serve tasks-frontend
+```
+
+Run test
+
+```bash
+npx nx e2e tasks-api-e2e --output-style=stream
+npx nx e2e tasks-frontend-e2e --output-style=stream
 ```
 
 ---
